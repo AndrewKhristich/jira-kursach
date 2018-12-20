@@ -1,0 +1,9 @@
+<div class="ui-g-12">
+  <h3 class="ui-g-2 first">Users</h3>
+  <h3 class="ui-g-2 first">Tasks</h3>
+</div>
+<div class="ui-g-12">
+  <p-listbox class="ui-g-2" [options]="users" [(ngModel)]="selectedUser" optionLabel="username"></p-listbox>
+  <p-listbox class="ui-g-2" [options]="tasks" [(ngModel)]="selectedTask" optionLabel="name"></p-listbox>
+  <p-button *ngIf="selectedTask && selectedUser" label="Grand" (onClick)="grand()"></p-button>
+</div>

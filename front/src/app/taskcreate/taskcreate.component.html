@@ -1,0 +1,22 @@
+<h1>New Task</h1>
+
+<div class="ui-g-12">
+  <div class="ui-g-12"><strong>Name</strong></div>
+  <input pInputText type="text" [(ngModel)]="newTask.name" required>
+</div>
+
+<div class="ui-g-12">
+  <div class="ui-g-12"><strong>Time</strong></div>
+  <input pInputText type="number" [(ngModel)]="newTask.estimate" required>
+</div>
+
+<div class="ui-g-12">
+  <div class="ui-g-12"><strong>Description</strong></div>
+  <input pInputText type="text" [(ngModel)]="newTask.description">
+</div>
+
+<div class="ui-g-12">
+  <div class="ui-g-12"><strong>Profile</strong></div>
+    <p-dropdown [options]="profiles" [(ngModel)]="selectedProfile" placeholder="Select Profile" [showClear]="true"></p-dropdown>
+</div>
+<p-button label="Submit" (onClick)="createTask()"></p-button>

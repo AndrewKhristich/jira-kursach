@@ -1,0 +1,96 @@
+<p-dialog header="Title" (onHide)="refreshReport()" (onShow)="refreshReport()" [(visible)]="display" [modal]="true" [style]="{width: '450px', minWidth: '350px'}">
+  <h1>New Report</h1>
+  <div class="ui-g-12">
+    <div class="ui-g-12"><strong>Time</strong></div>
+    <input pInputText type="number" [(ngModel)]="newReport.estimate" required>
+  </div>
+
+  <div class="ui-g-12">
+    <div class="ui-g-12"><strong>Description</strong></div>
+    <input pInputText type="text" [(ngModel)]="newReport.description">
+  </div>
+
+  <div class="ui-g-12">
+    <div class="ui-g-12"><strong>Date</strong></div>
+    <p-calendar [(ngModel)]="newReport.from" [showTime]="true" [inline]="true"></p-calendar>
+  </div>
+
+  <p-button label="Submit" (onClick)="doReport()"></p-button>
+</p-dialog>
+<div class="ui-g-12">
+  <p-panel class="ui-g-6" header="Info">
+    <div class="ui-grid-row mb-3">
+      <div class="ui-g-3"><strong>Task Name</strong></div>
+      <div class="ui-g-7">{{ task.name }}</div>
+      <div class="ui-g-2 text-right">
+        <p-button icon="fa-edit" (onClick)="startUpdate()"></p-button>
+        <p-button *ngIf="updating" label="Save" class="ui-button-secondar" (onClick)="saveUpdated()"></p-button>
+      </div>
+    </div>
+    <div class="ui-grid-row mb-3">
+      <div class="ui-g-3"><strong>Author</strong></div>
+      <div class="ui-g-9">{{ task.author.username }}</div>
+    </div>
+    <div class="ui-grid-row mb-3">
+      <div class="ui-g-3"><strong>Profile</strong></div>
+      <div class="ui-g-9">{{ task.profile }}</div>
+    </div>
+    <div class="ui-grid-row mb-3">
+      <div class="ui-g-3"><strong>Status</strong></div>
+      <div class="ui-g-9" *ngIf="!updating">{{ task.status }}</div>
+      <p-dropdown *ngIf="updating" [options]="statuses" [(ngModel)]="newStatus"  optionLabel="name" [showClear]="true"></p-dropdown>
+    </div>
+  </p-panel>
+  <p-panel class="ui-g-6" header="Estimate">
+    <div class="ui-grid-row mb-3">
+      <div class="ui-g-3"><strong>Estimate</strong></div>
+      <div class="ui-g-7">{{ task.estimate }}</div>
+    </div>
+    <div class="ui-grid-row mb-3">
+      <div class="ui-g-3"><strong>Reported</strong></div>
+      <div class="ui-g-7">{{ task.reported }}</div>
+    </div>
+  </p-panel>
+  <p-panel class="ui-g-6" >
+    <p-header>
+      <label class="ui-g-10">Description</label>
+    </p-header>
+    <div class="ui-grid-row mb-3" *ngIf="!updating">
+      <div class="ui-g-12">{{ task.description}}</div>
+    </div>
+    <div class="ui-grid-row mb-3" *ngIf="updating">
+      <input pInputText class="ui-g-12" [(ngModel)]="newDescr">
+    </div>
+  </p-panel>
+  <div class="ui-g-12">
+    <p-panel class="ui-g-4" header="Sub Tasks">
+      <div class="ui-grid-row mb-3">
+        <p-button label="Add sub task" (onClick)="createSub()"></p-button>
+        <div class="ui-g-12" *ngFor="let sub of task.subTasks">
+          <a [href]="'/dashboard/tasklist/'+sub.id">{{sub.name}}</a>
+        </div>
+      </div>
+    </p-panel>
+  </div>
+  <p-panel class="ui-g-8" header="Reports">
+    <button type="button" (click)="showDialog()" pButton icon="pi pi-info-circle" label="Report"></button>
+    <div class="ui-grid-row mb-3">
+      <div class="ui-g-12" *ngFor="let rep of task.reports">
+        <p-panel class="ui-g-12">
+          <div class="ui-grid-row mb-3">
+            <div class="ui-g-2"><strong>Author</strong></div>
+            <div class="ui-g-4">{{ rep.author }}</div>
+          </div>
+          <div class="ui-grid-row mb-3">
+            <div class="ui-g-2"><strong>Date</strong></div>
+            <div class="ui-g-4">{{ rep.reportedfrom | date:'dd/mm/yy hh:mm'}}</div>
+          </div>
+          <div class="ui-grid-row mb-3">
+            <div class="ui-g-12"><strong>Description</strong></div>
+            <div class="ui-g-12">{{ rep.description}}</div>
+          </div>
+        </p-panel>
+      </div>
+    </div>
+  </p-panel>
+</div>

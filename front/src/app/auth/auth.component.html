@@ -1,0 +1,27 @@
+<div class="ui-g">
+  <div class="ui-g-4"></div>
+  <div class="ui-g-4">
+    <p-panel header="Enter Credentials">
+      <div class="ui-g">
+        <div class="ui-g-2">
+          <label for="login">Username</label>
+        </div>
+        <div class="ui-g-10 ui-fluid">
+          <input pInputText id="login" [(ngModel)]="loginData.username">
+        </div>
+        <div class="ui-g-2">
+          <label for="password">Password</label>
+        </div>
+        <div class="ui-g-10 ui-fluid">
+          <input pPassword id="password" type="password" [(ngModel)]="loginData.password"/>
+        </div>
+        <div class="ui-g-4"></div>
+        <div class="ui-g-4 ui-fluid">
+          <button pButton (click)="login()" type="submit" label="Login"></button>
+        </div>
+        <div class="ui-g-4"></div>
+      </div>
+    </p-panel>
+  </div>
+  <div class="ui-g-4"></div>
+</div>
